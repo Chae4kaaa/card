@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страничка</title>
+    <title>Гнездо Чайки</title>
     <meta name="robots" content="noindex, nofollow">
     <meta property="og:title" content="chae4ka">
-    <meta property="og:description" content="Соц сети">
+    <meta property="og:description" content="links">
     <meta property="og:type" content="website">
     <style>
         * {
@@ -15,7 +15,7 @@
             padding: 0;
         }
         body {
-            background-color: #0b0f19;
+            background: radial-gradient(circle at center, #111827 0%, #030712 100%);
             color: #c9d1d9;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
@@ -25,26 +25,26 @@
             padding: 20px;
         }
         .card {
-            background: #111827;
-            border: 1px solid #1f2937;
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 36px 24px;
-            max-width: 380px;
+            max-width: 400px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
         .avatar-container {
-            width: 96px;
-            height: 96px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            margin: 0 auto 16px;
+            margin: 0 auto 20px;
             overflow: hidden;
-            border: 2px solid #374151;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             background: #1f2937;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
         }
         .avatar-container img {
             width: 100%;
@@ -55,7 +55,8 @@
             color: #f9fafb;
             font-size: 24px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
         }
         p.subtitle {
             color: #9ca3af;
@@ -65,10 +66,10 @@
         .links {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
         .btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
@@ -77,62 +78,87 @@
             border-radius: 14px;
             font-weight: 600;
             font-size: 15px;
-            transition: transform 0.15s ease, opacity 0.15s ease;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
         }
         .btn:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
-        .btn svg {
+        
+        .btn-icon {
             width: 20px;
             height: 20px;
-            fill: currentColor;
+            flex-shrink: 0;
+            filter: brightness(0) invert(1);
         }
+        
         .btn-tg {
             background: #229ed9;
             color: #ffffff;
         }
         .btn-tg:hover {
-            opacity: 0.9;
+            background: #1e8bbf;
+            box-shadow: 0 6px 20px rgba(34, 158, 217, 0.3);
+        }
+        .btn-github {
+            background: #24292e;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-github:hover {
+            background: #1b1f23;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
         .btn-twitch {
             background: #9146ff;
             color: #ffffff;
         }
         .btn-twitch:hover {
-            opacity: 0.9;
+            background: #7d2ee0;
+            box-shadow: 0 6px 20px rgba(145, 70, 255, 0.3);
         }
         .btn-discord {
             background: #5865f2;
             color: #ffffff;
         }
         .btn-discord:hover {
-            opacity: 0.9;
+            background: #4752c4;
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.3);
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-<div class="avatar-container">
+    <div class="avatar-container">
         <img src="https://i.pinimg.com/736x/94/83/49/948349a8bef72d7a88fc279ee26f819d.jpg" alt="chae4ka">
     </div>
+    
     <h1>Chae4ka</h1>
     <p class="subtitle">Сылочки</p>
 
     <div class="links">
         <a href="https://t.me/Chaykovni" class="btn btn-tg" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.02-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.22-1.84 7.04-3.05 8.46-3.64 4.03-1.68 4.87-1.97 5.41-1.98.12 0 .38.03.55.17.14.12.18.28.2.45-.02.07-.02.13-.04.23z"/></svg>
+            <img class="btn-icon" src="https://cdn.simpleicons.org/telegram" alt="Telegram">
             Telegram
         </a>
 
-        <a href="https://www.twitch.tv/Chae4kaaaa" class="btn btn-twitch" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M11.64 5.93h1.43v4.28h-1.43m3.93-4.28h1.43v4.28h-1.43M3.43 2L2 5.79v14.28h4.29V22h2.86l2.86-2.86h3.57L22 13.57V2H3.43zm17.14 10.71l-3.57 3.57h-3.57l-2.86 2.86v-2.86H6.29V3.43h14.28v9.28z"/></svg>
-            Twitch
+        <a href="https://discord.com/users/713749515500257314" class="btn btn-discord" target="_blank">
+        <img class="btn-icon" src="https://cdn.simpleicons.org/discord" alt="Discord">
+        Discord
         </a>
 
-        <a href="https://discord.com/users/713749515500257314" class="btn btn-discord" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-            Discord
+        <a href="https://github.com/chae4ka" class="btn btn-github" target="_blank">
+            <img class="btn-icon" src="https://cdn.simpleicons.org/github" alt="GitHub">
+            GitHub
+        </a>
+
+        <a href="https://www.twitch.tv/Chae4kaaaa" class="btn btn-twitch" target="_blank">
+            <img class="btn-icon" src="https://cdn.simpleicons.org/twitch" alt="Twitch">
+            Twitch
         </a>
     </div>
 </div>
