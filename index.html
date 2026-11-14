@@ -2,193 +2,330 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Гнездо Чайки</title>
     <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#050914">
     <meta property="og:title" content="chae4ka">
     <meta property="og:description" content="links">
     <meta property="og:type" content="website">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --bg: #050914;
+            --card: rgba(14, 20, 36, 0.72);
+            --line: rgba(255, 255, 255, 0.09);
+            --text: #f3f6fb;
+            --muted: #8f9bb3;
+            --glow-a: #38bdf8;
+            --glow-b: #8b5cf6;
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-text-size-adjust: 100%; }
         body {
-            background: radial-gradient(circle at center, #111827 0%, #030712 100%);
-            color: #c9d1d9;
+            background: var(--bg);
+            color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
-        }
-        .card {
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 36px 24px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }
-        .avatar-container {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: #1f2937;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-        }
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        h1 {
-            color: #f9fafb;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-        }
-        p.subtitle {
-            color: #9ca3af;
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-        .links {
+            min-height: 100dvh;
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            gap: 12px;
+            align-items: center;
+            padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+            overflow-x: hidden;
+        }
+
+        #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 36px 20px 22px;
+            text-align: center;
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .avatar-wrap {
+            position: relative;
+            width: 108px; height: 108px;
+            border-radius: 50%;
+            padding: 3px;
+            background: conic-gradient(from 0deg, var(--glow-a), var(--glow-b), #14b8a6, var(--glow-a));
+            animation: spin 10s linear infinite;
+        }
+        .avatar-wrap .avatar {
+            width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+            background: #111827; border: 3px solid #0b1020;
+            animation: spin 10s linear infinite reverse;
+        }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .float { width: 108px; margin: 0 auto 18px; animation: bob 5s ease-in-out infinite; }
+        @keyframes bob { 50% { transform: translateY(-7px); } }
+
+        .card { animation: cardIn .8s cubic-bezier(.2, .8, .2, 1) both; }
+        @keyframes cardIn { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
+
+        h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.6px; }
+        .ch { display: inline-block; opacity: 0; transform: translateY(16px) scale(.7); animation: chIn .55s cubic-bezier(.2, .9, .3, 1.5) forwards; animation-delay: calc(var(--i) * 70ms + 250ms); }
+        @keyframes chIn { to { opacity: 1; transform: none; } }
+        .subtitle { color: var(--muted); font-size: 14px; margin: 4px 0 26px; }
+
+        .links { display: flex; flex-direction: column; gap: 10px; }
+
+        .btn {
+            --c: #fff;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 14px;
             text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 14px;
+            color: var(--text);
+            padding: 10px 14px 10px 10px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid var(--line);
             font-weight: 600;
-            font-size: 15px;
-            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            text-align: left;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: rise .5s ease forwards;
+            -webkit-tap-highlight-color: transparent;
         }
-        .btn:hover {
+        .btn:nth-child(1) { --n: 0; animation-delay: .50s; }
+        .btn:nth-child(2) { --n: 1; animation-delay: .58s; }
+        .btn:nth-child(3) { --n: 2; animation-delay: .66s; }
+        .btn:nth-child(4) { --n: 3; animation-delay: .74s; }
+        .btn:nth-child(5) { --n: 4; animation-delay: .82s; }
+        .btn:nth-child(6) { --n: 5; animation-delay: .90s; }
+        .btn:nth-child(7) { --n: 6; animation-delay: .98s; }
+        @keyframes rise { to { opacity: 1; transform: none; } }
+
+        .btn { overflow: hidden; }
+
+        .rip {
+            position: absolute; width: 22px; height: 22px; border-radius: 50%; pointer-events: none;
+            background: rgba(255, 255, 255, .3);
+            transform: translate(-50%, -50%) scale(0);
+            animation: rip .65s ease-out forwards;
+        }
+        @keyframes rip { to { transform: translate(-50%, -50%) scale(16); opacity: 0; } }
+
+        .btn .ico {
+            width: 42px; height: 42px; flex-shrink: 0;
+            display: grid; place-items: center;
+            border-radius: 13px;
+            background: var(--c);
+            box-shadow: 0 4px 10px -4px var(--c);
+        }
+        .btn .ico img { width: 22px; height: 22px; display: block; }
+        .btn .label { flex: 1; min-width: 0; }
+        .btn .arrow {
+            width: 18px; height: 18px; flex-shrink: 0; opacity: .35;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+        .btn:hover, .btn:focus-visible {
             transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: color-mix(in srgb, var(--c) 60%, transparent);
+            box-shadow: 0 10px 28px -10px var(--c);
+            outline: none;
         }
-        .btn:active {
-            transform: scale(0.98);
-        }
-        
-        .btn-icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            filter: brightness(0) invert(1);
-        }
-        
-        .btn-tg {
-            background: #229ed9;
-            color: #ffffff;
-        }
-        .btn-tg:hover {
-            background: #1e8bbf;
-            box-shadow: 0 6px 20px rgba(34, 158, 217, 0.3);
-        }
-        .btn-discord {
-            background: #5865f2;
-            color: #ffffff;
-        }
-        .btn-discord:hover {
-            background: #4752c4;
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.3);
-        }
-        .btn-steam {
-            background: #171a21;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .btn-steam:hover {
-            background: #1b2838;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-        }
-        .btn-github {
-            background: #24292e;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .btn-github:hover {
-            background: #1b1f23;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-        }
-        .btn-youtube {
-            background: #ff0000;
-            color: #ffffff;
-        }
-        .btn-youtube:hover {
-            background: #cc0000;
-            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
-        }
-        .btn-twitch {
-            background: #9146ff;
-            color: #ffffff;
-        }
-        .btn-twitch:hover {
-            background: #7d2ee0;
-            box-shadow: 0 6px 20px rgba(145, 70, 255, 0.3);
+        .btn:hover .arrow, .btn:focus-visible .arrow { opacity: .9; transform: translateX(3px); }
+        .btn:active { transform: scale(0.98); }
+
+        .btn-tg      { --c: #229ed9; }
+        .btn-discord { --c: #5865f2; }
+        .btn-steam   { --c: #1b2838; }
+        .btn-github  { --c: #2b3137; }
+        .btn-tiktok  { --c: #111111; }
+        .btn-tiktok .ico { box-shadow: none; border: 1px solid rgba(255, 255, 255, 0.12); }
+        .btn-tiktok:hover, .btn-tiktok:focus-visible { box-shadow: 0 10px 28px -10px rgba(255, 255, 255, .25); border-color: rgba(255, 255, 255, .35); }
+        .btn-youtube { --c: #ff0033; }
+        .btn-twitch  { --c: #9146ff; }
+
+        .foot { margin-top: 20px; font-size: 12px; color: var(--muted); opacity: .7; letter-spacing: .04em; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .avatar-wrap, .avatar-wrap .avatar, .float, .card { animation: none; }
+            .ch { animation: none; opacity: 1; transform: none; }
+            .btn { animation: none; opacity: 1; transform: none; }
+            .rip { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="avatar-container">
-        <img src="https://i.pinimg.com/736x/94/83/49/948349a8bef72d7a88fc279ee26f819d.jpg" alt="chae4ka">
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<main class="card">
+    <div class="float">
+        <div class="avatar-wrap">
+            <div class="avatar">
+                <img src="https://i.pinimg.com/736x/94/83/49/948349a8bef72d7a88fc279ee26f819d.jpg" alt="chae4ka">
+            </div>
+        </div>
     </div>
-    
-    <h1>Chae4ka</h1>
+
+    <h1 id="name" aria-label="Chae4ka">Chae4ka</h1>
     <p class="subtitle">Сылочки</p>
 
     <div class="links">
-        <a href="https://t.me/Chaykovni" class="btn btn-tg" target="_blank">
-            <img class="btn-icon" src="https://cdn.simpleicons.org/telegram" alt="Telegram">
-            Telegram
+        <a href="https://t.me/Chaykovni" class="btn btn-tg" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/telegram/white" alt=""></span>
+            <span class="label">Telegram</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </a>
 
-        <a href="https://discord.com/users/713749515500257314" class="btn btn-discord" target="_blank">
-            <img class="btn-icon" src="https://cdn.simpleicons.org/discord" alt="Discord">
-            Discord
+        <a href="https://discord.com/users/713749515500257314" class="btn btn-discord" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/discord/white" alt=""></span>
+            <span class="label">Discord</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </a>
 
-        <a href="https://steamcommunity.com/id/chae4kaa" class="btn btn-steam" target="_blank">
-            <img class="btn-icon" src="https://cdn.simpleicons.org/steam" alt="Steam">
-            Steam
+        <a href="https://steamcommunity.com/id/chae4kaa" class="btn btn-steam" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/steam/white" alt=""></span>
+            <span class="label">Steam</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </a>
 
-        <a href="https://github.com/Chae4kaaa" class="btn btn-github" target="_blank">
-            <img class="btn-icon" src="https://cdn.simpleicons.org/github" alt="GitHub">
-            GitHub
+        <a href="https://github.com/Chae4kaaa" class="btn btn-github" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/github/white" alt=""></span>
+            <span class="label">GitHub</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </a>
 
-        <a href="https://www.youtube.com/@_Chae4ka_" class="btn btn-youtube" target="_blank">
-            <img class="btn-icon" src="https://cdn.simpleicons.org/youtube" alt="YouTube">
-            YouTube
+        <a href="https://www.tiktok.com/@_chae4ka_" class="btn btn-tiktok" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/tiktok/white" alt=""></span>
+            <span class="label">TikTok</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </a>
 
-        <a href="https://www.twitch.tv/Chae4kaaaa" class="btn btn-twitch" target="_blank">
-            <img class="btn-icon" src="https://cdn.simpleicons.org/twitch" alt="Twitch">
-            Twitch
+        <a href="https://www.youtube.com/@_Chae4ka_" class="btn btn-youtube" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/youtube/white" alt=""></span>
+            <span class="label">YouTube</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+
+        <a href="https://www.twitch.tv/Chae4kaaaa" class="btn btn-twitch" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><img src="https://cdn.simpleicons.org/twitch/white" alt=""></span>
+            <span class="label">Twitch</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         </a>
     </div>
-</div>
+
+    <p class="foot">Гнездо Чайки</p>
+</main>
+
+<script>
+(function () {
+    var cv = document.getElementById('stars');
+    var cx = cv.getContext('2d');
+    var stars = [], shots = [], nextShot = 2.5, w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function make() {
+        var n = Math.round(Math.min(160, Math.max(60, (w * h) / 9000)));
+        stars = [];
+        for (var i = 0; i < n; i++) {
+            var depth = Math.random();
+            stars.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: 0.4 + depth * 1.1,
+                v: 4 + depth * 14,
+                a: 0.25 + depth * 0.65,
+                tw: Math.random() * Math.PI * 2
+            });
+        }
+    }
+    function size() {
+        w = window.innerWidth; h = window.innerHeight;
+        cv.width = w * dpr; cv.height = h * dpr;
+        cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        make();
+        draw(0);
+    }
+    function draw(dt) {
+        cx.clearRect(0, 0, w, h);
+        for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            s.y += s.v * dt;
+            s.tw += dt * 1.5;
+            if (s.y > h + 2) { s.y = -2; s.x = Math.random() * w; }
+            var a = s.a * (0.75 + 0.25 * Math.sin(s.tw));
+            cx.globalAlpha = a;
+            cx.fillStyle = '#dfe9ff';
+            cx.beginPath();
+            cx.arc(s.x, s.y, s.r, 0, 6.2832);
+            cx.fill();
+        }
+        cx.globalAlpha = 1;
+
+        nextShot -= dt;
+        if (dt > 0 && nextShot <= 0) {
+            nextShot = 4 + Math.random() * 5;
+            shots.push({ x: Math.random() * w * 0.9 + w * 0.1, y: -10, vx: -(180 + Math.random() * 120), vy: 260 + Math.random() * 140, life: 0 });
+        }
+        for (var j = shots.length - 1; j >= 0; j--) {
+            var p = shots[j];
+            p.life += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+            var len = 0.12, fade = Math.max(0, 1 - p.life / 1.6);
+            var g = cx.createLinearGradient(p.x, p.y, p.x - p.vx * len, p.y - p.vy * len);
+            g.addColorStop(0, 'rgba(255,255,255,' + (0.9 * fade) + ')');
+            g.addColorStop(1, 'rgba(255,255,255,0)');
+            cx.strokeStyle = g; cx.lineWidth = 1.6; cx.lineCap = 'round';
+            cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x - p.vx * len, p.y - p.vy * len); cx.stroke();
+            if (p.life > 1.6 || p.y > h + 20) shots.splice(j, 1);
+        }
+    }
+    var last = performance.now();
+    function loop(now) {
+        var dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        draw(dt);
+        requestAnimationFrame(loop);
+    }
+    window.addEventListener('resize', size);
+    size();
+    if (!reduce) requestAnimationFrame(loop);
+
+    var name = document.getElementById('name');
+    if (name && !reduce) {
+        var t = name.textContent;
+        name.textContent = '';
+        for (var k = 0; k < t.length; k++) {
+            var s = document.createElement('span');
+            s.className = 'ch'; s.setAttribute('aria-hidden', 'true');
+            s.style.setProperty('--i', k);
+            s.textContent = t[k];
+            name.appendChild(s);
+        }
+    }
+
+    var btns = document.querySelectorAll('.btn');
+    for (var b = 0; b < btns.length; b++) {
+        btns[b].addEventListener('pointerdown', function (e) {
+            if (navigator.vibrate) { try { navigator.vibrate(10); } catch (err) {} }
+            if (reduce) return;
+            var r = this.getBoundingClientRect();
+            var d = document.createElement('span');
+            d.className = 'rip';
+            d.style.left = (e.clientX - r.left) + 'px';
+            d.style.top = (e.clientY - r.top) + 'px';
+            this.appendChild(d);
+            setTimeout(function () { d.remove(); }, 700);
+        });
+    }
+})();
+</script>
 
 </body>
 </html>
